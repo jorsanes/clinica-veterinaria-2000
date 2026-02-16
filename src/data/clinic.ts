@@ -66,7 +66,7 @@ export const clinic: ClinicConfig = {
   identity: {
     name: "Clinica Veterinaria 2000",
     tagline: "Tu veterinario de confianza en Tres Cantos",
-    logo: "/assets/images/logo.jpg",
+    logo: "/images/logo.jpg",
   },
 
   contact: {
