@@ -1,0 +1,228 @@
+---
+/**
+ * Layout.astro - Wrapper principal para todas las paginas
+ * CSS Variables, SEO, Google Fonts, Schema.org
+ *
+ * Clinica Veterinaria 2000 - Tres Cantos
+ */
+import "../styles/global.css";
+import { clinic } from "../config/clinic";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import TopBar from "../components/TopBar.astro";
+import SEO from "../components/SEO.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  noIndex?: boolean;
+}
+
+const {
+  title = `${clinic.identity.name} | ${clinic.identity.tagline}`,
+  description = "Veterinario de confianza en Tres Cantos. Cuidamos de tu perro, gato o ave con experiencia y carino. Urgencias y trato familiar.",
+  image = "/images/og-image.jpg",
+  type = "website",
+  noIndex = false,
+} = Astro.props;
+
+// Colores desde configuracion
+const { primary, primaryLight, secondary, secondaryDark, accent, background, surface, text, textMuted } = clinic.design.colors;
+const fontFamily = clinic.design.fonts.primary;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/logo.jpg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      noIndex={noIndex}
+    />
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href={`https://fonts.googleapis.com/css2?family=${fontFamily}:wght@300;400;500;600;700&display=swap`}
+      rel="stylesheet"
+    />
+
+    <!-- CSS Variables dinamicas desde clinic.ts -->
+    <style define:vars={{
+      colorPrimary: primary,
+      colorPrimaryLight: primaryLight,
+      colorSecondary: secondary,
+      colorSecondaryDark: secondaryDark,
+      colorAccent: accent,
+      colorBackground: background,
+      colorSurface: surface,
+      colorText: text,
+      colorTextMuted: textMuted,
+      fontFamily: fontFamily,
+    }}>
+      :root {
+        --color-primary: var(--colorPrimary);
+        --color-primary-light: var(--colorPrimaryLight);
+        --color-secondary: var(--colorSecondary);
+        --color-secondary-dark: var(--colorSecondaryDark);
+        --color-accent: var(--colorAccent);
+        --color-background: var(--colorBackground);
+        --color-surface: var(--colorSurface);
+        --color-text: var(--colorText);
+        --color-text-muted: var(--colorTextMuted);
+        --font-family: var(--fontFamily), system-ui, sans-serif;
+      }
+
+      body {
+        font-family: var(--font-family);
+        background-color: var(--color-background);
+        color: var(--color-text);
+      }
+
+      /* Utility classes usando CSS variables */
+      .text-primary { color: var(--color-primary); }
+      .text-secondary { color: var(--color-secondary); }
+      .text-accent { color: var(--color-accent); }
+      .bg-primary { background-color: var(--color-primary); }
+      .bg-secondary { background-color: var(--color-secondary); }
+      .bg-surface { background-color: var(--color-surface); }
+      .border-primary { border-color: var(--color-primary); }
+      .border-secondary { border-color: var(--color-secondary); }
+
+      /* Prose styles for legal content */
+      .prose {
+        max-width: 65ch;
+        color: var(--color-text);
+        line-height: 1.75;
+      }
+      .prose h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+      .prose h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+      }
+      .prose h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .prose p {
+        margin-bottom: 1rem;
+      }
+      .prose ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .prose li {
+        margin-bottom: 0.5rem;
+      }
+      .prose a {
+        color: var(--color-primary);
+        text-decoration: underline;
+      }
+      .prose a:hover {
+        color: var(--color-secondary);
+      }
+      .prose strong {
+        font-weight: 600;
+      }
+    </style>
+
+    <!-- Schema.org VeterinaryCare -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VeterinaryCare",
+        name: clinic.identity.name,
+        description: description,
+        image: "/images/logo.jpg",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: clinic.location.address,
+          addressLocality: clinic.location.city,
+          addressRegion: clinic.location.region,
+          postalCode: clinic.location.postalCode,
+          addressCountry: clinic.location.country,
+        },
+        telephone: clinic.contact.phone,
+        email: clinic.contact.email,
+        url: clinic.identity.url,
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 40.6010,
+          longitude: -3.7126,
+        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "10:00",
+            closes: "20:00",
+          },
+        ],
+        sameAs: [
+          clinic.contact.facebook,
+        ].filter(Boolean),
+        priceRange: "$$",
+      })}
+    />
+  </head>
+
+  <body class="min-h-screen flex flex-col antialiased">
+    <!-- TopBar con info de contacto -->
+    <TopBar />
+
+    <!-- Header con navegacion -->
+    <Header />
+
+    <!-- Contenido principal -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- Smooth scroll para anchor links -->
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId && targetId !== '#') {
+            const target = document.querySelector(targetId);
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

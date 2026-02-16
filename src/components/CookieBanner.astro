@@ -1,0 +1,237 @@
+---
+/**
+ * Cookie Banner - Clinica Veterinaria 2000
+ * Banner de consentimiento de cookies RGPD
+ */
+import { clinic } from "../data/clinic";
+
+const primaryColor = clinic.design.colors.primary;
+const textColor = clinic.design.colors.text;
+const textMutedColor = clinic.design.colors.textMuted;
+---
+
+<div
+  id="cookie-banner"
+  class="cookie-banner hidden"
+  role="dialog"
+  aria-labelledby="cookie-title"
+  aria-modal="true"
+>
+  <div class="cookie-container">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h3 id="cookie-title" class="cookie-title">
+          Utilizamos cookies
+        </h3>
+        <p class="cookie-description">
+          Usamos cookies para mejorar tu experiencia en nuestra web.
+          <a href="/politica-cookies" class="cookie-link">Mas informacion</a>
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-reject" class="btn-reject">
+          Solo necesarias
+        </button>
+        <button id="cookie-accept" class="btn-accept">
+          Aceptar todas
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ primaryColor, textColor, textMutedColor }}>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+  }
+
+  .cookie-banner.hidden {
+    display: none;
+  }
+
+  .cookie-banner.show {
+    display: block;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cookie-container {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+
+  .cookie-content {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .cookie-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+  }
+
+  .cookie-text {
+    flex: 1;
+  }
+
+  .cookie-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--textColor);
+    margin: 0 0 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cookie-title::before {
+    content: '';
+    font-size: 1.25rem;
+  }
+
+  .cookie-description {
+    font-size: 0.875rem;
+    color: var(--textMutedColor);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cookie-link {
+    color: var(--primaryColor);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cookie-link:hover {
+    text-decoration: underline;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .btn-reject,
+  .btn-accept {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: inherit;
+  }
+
+  .btn-reject {
+    background: transparent;
+    color: var(--textMutedColor);
+  }
+
+  .btn-reject:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-accept {
+    background-color: var(--primaryColor);
+    color: white;
+  }
+
+  .btn-accept:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .btn-reject:focus,
+  .btn-accept:focus {
+    outline: 2px solid var(--primaryColor);
+    outline-offset: 2px;
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    const COOKIE_NAME = 'cv2000_cookie_consent';
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+
+    // Check if consent already given
+    function hasConsent() {
+      return localStorage.getItem(COOKIE_NAME) !== null;
+    }
+
+    // Set consent
+    function setConsent(value) {
+      localStorage.setItem(COOKIE_NAME, value);
+      hideBanner();
+    }
+
+    // Show banner
+    function showBanner() {
+      if (banner) {
+        banner.classList.remove('hidden');
+        banner.classList.add('show');
+      }
+    }
+
+    // Hide banner
+    function hideBanner() {
+      if (banner) {
+        banner.classList.remove('show');
+        banner.classList.add('hidden');
+      }
+    }
+
+    // Initialize
+    if (!hasConsent()) {
+      setTimeout(showBanner, 1500);
+    }
+
+    // Event listeners
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
+        setConsent('all');
+      });
+    }
+
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', function() {
+        setConsent('necessary');
+      });
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && banner && banner.classList.contains('show')) {
+        setConsent('necessary');
+      }
+    });
+  })();
+</script>

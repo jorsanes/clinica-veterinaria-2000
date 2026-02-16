@@ -1,0 +1,173 @@
+---
+/**
+ * TrustBar / Testimonials Section - Clinica Veterinaria 2000
+ * Seccion de testimonios con rating de Facebook
+ * Lee datos desde clinic.ts
+ */
+import { clinic } from "../config/clinic";
+
+interface Props {
+  title?: string;
+  showFacebookLink?: boolean;
+  maxTestimonials?: number;
+}
+
+const {
+  title = "Nuestros clientes (y sus mascotas) lo tienen claro:",
+  showFacebookLink = true,
+  maxTestimonials = 3,
+} = Astro.props;
+
+// Colores
+const primaryColor = clinic.design.colors.primary;
+const secondaryColor = clinic.design.colors.secondary;
+const textColor = clinic.design.colors.text;
+const textMutedColor = clinic.design.colors.textMuted;
+const surfaceColor = clinic.design.colors.surface;
+
+// Testimonios
+const testimonials = clinic.testimonials.slice(0, maxTestimonials);
+
+// Link de Facebook
+const facebookUrl = clinic.contact.social.facebook;
+---
+
+<section class="trust-bar-section" style={`background-color: ${surfaceColor};`}>
+  <div class="container">
+    <!-- Header con rating -->
+    <h2 class="section-title" style={`color: ${textColor};`}>
+      {title}
+    </h2>
+
+    <!-- Rating y enlace Facebook -->
+    <div class="rating-container">
+      <span class="stars" aria-label="5 estrellas">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+      </span>
+      {showFacebookLink && facebookUrl && (
+        <a
+          href={facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="facebook-link"
+          style={`color: ${primaryColor};`}
+        >
+          Ver fotos y resenas en Facebook
+        </a>
+      )}
+    </div>
+
+    <!-- Grid de testimonios -->
+    <div class="testimonials-grid">
+      {testimonials.map((testimonial) => (
+        <div class="testimonial-card" style={`border-left-color: ${secondaryColor};`}>
+          <p class="testimonial-text" style={`color: ${textColor};`}>
+            "{testimonial.text}"
+          </p>
+          <p class="testimonial-author" style={`color: ${primaryColor};`}>
+            - {testimonial.author}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar-section {
+    padding: 2rem 0;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .rating-container {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .stars {
+    font-size: 1.5rem;
+    color: #fbbf24;
+    margin-right: 0.5rem;
+  }
+
+  .star {
+    display: inline-block;
+  }
+
+  .facebook-link {
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .facebook-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border-left: 4px solid;
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rating-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .stars {
+      margin-right: 0;
+    }
+  }
+</style>

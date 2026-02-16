@@ -1,0 +1,206 @@
+---
+/**
+ * Testimonials Component - Clinica Veterinaria 2000
+ * Seccion de testimonios de clientes con 3 tarjetas
+ * Incluye link a Facebook con resenas
+ */
+import { clinic } from "../data/clinic";
+
+const primaryColor = clinic.design.colors.primary;
+const secondaryColor = clinic.design.colors.secondary;
+const textColor = clinic.design.colors.text;
+const surfaceColor = clinic.design.colors.surface;
+const facebookUrl = clinic.social.facebook;
+---
+
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">
+      Nuestros clientes (y sus mascotas) lo tienen claro:
+    </h2>
+
+    <!-- Rating Stars & Facebook Link -->
+    <div class="rating-bar">
+      <div class="stars" aria-label="5 estrellas">
+        {[1, 2, 3, 4, 5].map(() => (
+          <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        ))}
+      </div>
+      {facebookUrl && (
+        <a
+          href={facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="facebook-link"
+        >
+          <svg class="facebook-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Ver fotos y resenas en Facebook
+        </a>
+      )}
+    </div>
+
+    <!-- Testimonial Cards -->
+    <div class="testimonials-grid">
+      {clinic.testimonials.map((testimonial, index) => (
+        <div class="testimonial-card" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="quote-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+          <p class="testimonial-text">"{testimonial.text}"</p>
+          <p class="testimonial-author">- {testimonial.author}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ primaryColor, secondaryColor, textColor, surfaceColor }}>
+  .testimonials-section {
+    padding: 4rem 0;
+    background-color: var(--surfaceColor);
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--textColor);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .rating-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .rating-bar {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .star-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #fbbf24;
+  }
+
+  .facebook-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primaryColor);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .facebook-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .facebook-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: #1877f2;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--secondaryColor);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .quote-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.1;
+    color: var(--primaryColor);
+  }
+
+  .quote-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    color: var(--textColor);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--primaryColor);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

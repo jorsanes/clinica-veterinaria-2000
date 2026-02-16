@@ -1,0 +1,142 @@
+---
+/**
+ * HowItWorks Section - Clinica Veterinaria 2000
+ * Seccion "Como funciona" con 3 pasos
+ * Explica el proceso de cita de forma sencilla
+ */
+import { clinic } from "../config/clinic";
+
+interface Step {
+  number: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  steps?: Step[];
+}
+
+const defaultSteps: Step[] = [
+  {
+    number: 1,
+    title: "Llamanos",
+    description: "Te damos cita rapidamente para evitar esperas innecesarias.",
+  },
+  {
+    number: 2,
+    title: "Visita tranquila",
+    description: "Nos tomamos el tiempo necesario para que tu mascota se sienta segura (y tu tambien!).",
+  },
+  {
+    number: 3,
+    title: "Seguimiento",
+    description: "No nos olvidamos de ti al salir por la puerta; nos importan los resultados a largo plazo.",
+  },
+];
+
+const {
+  title = "Salud Animal sin estres ni complicaciones",
+  steps = defaultSteps,
+} = Astro.props;
+
+// Colores
+const primaryColor = clinic.design.colors.primary;
+const textColor = clinic.design.colors.text;
+const textMutedColor = clinic.design.colors.textMuted;
+const backgroundColor = clinic.design.colors.background;
+---
+
+<section class="how-it-works-section" style={`background-color: ${backgroundColor};`}>
+  <div class="container">
+    <!-- Header -->
+    <h2 class="section-title" style={`color: ${primaryColor};`}>
+      {title}
+    </h2>
+
+    <!-- Steps Grid -->
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <div class="step-item">
+          <div class="step-number" style={`color: ${primaryColor}15;`}>
+            {step.number}
+          </div>
+          <h3 class="step-title" style={`color: ${textColor};`}>
+            {step.title}
+          </h3>
+          <p class="step-description" style={`color: ${textMutedColor};`}>
+            {step.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works-section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .steps-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .step-item {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .step-number {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .steps-grid {
+      flex-direction: column;
+    }
+
+    .step-number {
+      font-size: 3rem;
+    }
+  }
+</style>

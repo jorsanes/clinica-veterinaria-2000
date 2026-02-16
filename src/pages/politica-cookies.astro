@@ -1,0 +1,154 @@
+---
+/**
+ * Politica de Cookies - Clinica Veterinaria 2000
+ * Informacion sobre el uso de cookies conforme a la normativa espanola
+ */
+import Layout from "../layouts/Layout.astro";
+
+// Datos de la clinica
+const clinica = {
+  nombre: "Clinica Veterinaria 2000",
+  direccion: "C. del Pico del Indio, 39",
+  codigoPostal: "28760",
+  ciudad: "Tres Cantos",
+  provincia: "Madrid",
+  telefono: "91 803 45 19",
+  email: "clinica2000@gmail.com",
+  web: "https://veterinaria2000.es",
+};
+---
+
+<Layout
+  title="Politica de Cookies"
+  description={`Politica de cookies de ${clinica.nombre}. Informacion sobre las cookies utilizadas en nuestro sitio web.`}
+>
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-3xl prose prose-lg">
+      <h1 class="text-primary">Politica de Cookies</h1>
+
+      <h2>1. Que son las Cookies</h2>
+      <p>
+        Las cookies son pequenos archivos de texto que los sitios web almacenan en su dispositivo
+        (ordenador, tablet, movil) cuando los visita. Las cookies permiten que el sitio web
+        recuerde sus acciones y preferencias (como idioma, tamano de fuente y otras preferencias
+        de visualizacion) durante un periodo de tiempo.
+      </p>
+      <p>
+        El uso de cookies es una practica habitual en la mayoria de sitios web profesionales
+        y su objetivo es mejorar la experiencia del usuario.
+      </p>
+
+      <h2>2. Tipos de Cookies que Utilizamos</h2>
+
+      <h3>Cookies Tecnicas (Necesarias)</h3>
+      <p>
+        Son imprescindibles para el funcionamiento del sitio web. Permiten navegar por el sitio
+        y utilizar sus funciones basicas. Sin estas cookies, el sitio web no funcionaria correctamente.
+      </p>
+      <ul>
+        <li><strong>cookie_consent:</strong> Almacena su preferencia de consentimiento de cookies (1 ano)</li>
+        <li><strong>session_id:</strong> Mantiene la sesion del usuario durante la navegacion</li>
+      </ul>
+
+      <h3>Cookies Analiticas (Opcionales)</h3>
+      <p>
+        Nos permiten analizar el uso del sitio web para mejorar la experiencia del usuario.
+        Solo se activan si usted acepta todas las cookies o especificamente las analiticas.
+      </p>
+      <ul>
+        <li><strong>_ga:</strong> Google Analytics - Distingue usuarios unicos (2 anos)</li>
+        <li><strong>_gid:</strong> Google Analytics - Distingue usuarios (24 horas)</li>
+        <li><strong>_gat:</strong> Google Analytics - Limita el porcentaje de solicitudes (1 minuto)</li>
+      </ul>
+
+      <h2>3. Cookies de Terceros</h2>
+      <p>Nuestro sitio web puede utilizar servicios de terceros que establecen sus propias cookies:</p>
+
+      <h3>Google Analytics</h3>
+      <p>
+        Servicio de analisis web que nos permite entender como los usuarios interactuan con nuestro sitio.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politica de privacidad de Google</a>
+      </p>
+
+      <h3>Google Maps</h3>
+      <p>
+        Si se muestra un mapa en la pagina de contacto, Google puede establecer cookies.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politica de privacidad de Google</a>
+      </p>
+
+      <h3>Facebook</h3>
+      <p>
+        Si utilizamos el boton de compartir de Facebook o el pixel de seguimiento.
+        <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener">Politica de privacidad de Facebook</a>
+      </p>
+
+      <h2>4. Como Gestionar las Cookies</h2>
+      <p>
+        Puede configurar su navegador para rechazar cookies o para que le avise cuando se envie una cookie.
+        Sin embargo, si rechaza las cookies, es posible que algunas partes del sitio web no funcionen correctamente.
+      </p>
+
+      <h3>Configuracion por Navegador</h3>
+      <p>Instrucciones para gestionar cookies en los navegadores mas comunes:</p>
+      <ul>
+        <li>
+          <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a>
+        </li>
+        <li>
+          <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener">Mozilla Firefox</a>
+        </li>
+        <li>
+          <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>
+        </li>
+        <li>
+          <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>
+        </li>
+        <li>
+          <a href="https://help.opera.com/en/latest/web-preferences/#cookies" target="_blank" rel="noopener">Opera</a>
+        </li>
+      </ul>
+
+      <h3>Herramientas de Opt-out</h3>
+      <p>Tambien puede desactivar las cookies de seguimiento a traves de estas herramientas:</p>
+      <ul>
+        <li>
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>
+        </li>
+        <li>
+          <a href="https://www.youronlinechoices.com/es/" target="_blank" rel="noopener">Your Online Choices (Europa)</a>
+        </li>
+      </ul>
+
+      <h2>5. Base Legal</h2>
+      <p>
+        La utilizacion de cookies en nuestro sitio web se realiza conforme a:
+      </p>
+      <ul>
+        <li>Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Informacion y Comercio Electronico (LSSI-CE)</li>
+        <li>Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo (RGPD)</li>
+        <li>Directrices sobre cookies de la Agencia Espanola de Proteccion de Datos (AEPD)</li>
+      </ul>
+
+      <h2>6. Actualizacion de la Politica</h2>
+      <p>
+        Podemos actualizar esta Politica de Cookies para reflejar cambios en las cookies que utilizamos
+        o por otras razones operativas, legales o reglamentarias. Le recomendamos visitar esta pagina
+        periodicamente para estar informado sobre el uso de cookies.
+      </p>
+
+      <h2>7. Mas Informacion</h2>
+      <p>
+        Si tiene alguna pregunta sobre nuestra Politica de Cookies, puede contactarnos en:
+      </p>
+      <ul>
+        <li><strong>Email:</strong> <a href={`mailto:${clinica.email}`}>{clinica.email}</a></li>
+        <li><strong>Telefono:</strong> {clinica.telefono}</li>
+        <li><strong>Direccion:</strong> {clinica.direccion}, {clinica.codigoPostal} {clinica.ciudad}</li>
+      </ul>
+
+      <p class="text-sm mt-8 pt-4 border-t border-gray-200 text-gray-500">
+        Ultima actualizacion: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+    </div>
+  </section>
+</Layout>

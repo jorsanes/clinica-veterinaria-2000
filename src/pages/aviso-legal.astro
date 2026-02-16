@@ -1,0 +1,137 @@
+---
+/**
+ * Aviso Legal - Clinica Veterinaria 2000
+ * Pagina de aviso legal conforme a LSSI-CE
+ */
+import Layout from "../layouts/Layout.astro";
+
+// Datos de la clinica
+const clinica = {
+  nombre: "Clinica Veterinaria 2000",
+  direccion: "C. del Pico del Indio, 39",
+  codigoPostal: "28760",
+  ciudad: "Tres Cantos",
+  provincia: "Madrid",
+  telefono: "91 803 45 19",
+  telefonoUrgencias: "686 06 49 02",
+  email: "clinica2000@gmail.com",
+  web: "https://veterinaria2000.es",
+  colegioProfesional: "Colegio Oficial de Veterinarios de Madrid",
+};
+
+const direccionCompleta = `${clinica.direccion}, ${clinica.codigoPostal} ${clinica.ciudad}, ${clinica.provincia}`;
+---
+
+<Layout
+  title="Aviso Legal"
+  description={`Aviso legal de ${clinica.nombre}. Informacion sobre el titular del sitio web y condiciones de uso conforme a la LSSI-CE.`}
+>
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-3xl prose prose-lg">
+      <h1 class="text-primary">Aviso Legal</h1>
+
+      <h2>1. Datos Identificativos</h2>
+      <p>
+        En cumplimiento del articulo 10 de la Ley 34/2002, de 11 de julio,
+        de Servicios de la Sociedad de la Informacion y Comercio Electronico (LSSI-CE),
+        se informa a los usuarios de los datos identificativos del titular del sitio web:
+      </p>
+      <ul>
+        <li><strong>Titular:</strong> {clinica.nombre}</li>
+        <li><strong>CIF/NIF:</strong> [Pendiente de incorporacion]</li>
+        <li><strong>Domicilio:</strong> {direccionCompleta}</li>
+        <li><strong>Telefono:</strong> {clinica.telefono}</li>
+        <li><strong>Telefono Urgencias:</strong> {clinica.telefonoUrgencias}</li>
+        <li><strong>Email:</strong> <a href={`mailto:${clinica.email}`}>{clinica.email}</a></li>
+      </ul>
+
+      <h2>2. Informacion sobre Profesion Regulada</h2>
+      <p>
+        En cumplimiento de la LSSI, se hace constar que los servicios veterinarios
+        son prestados por profesionales colegiados:
+      </p>
+      <ul>
+        <li><strong>Colegio Profesional:</strong> {clinica.colegioProfesional}</li>
+        <li><strong>Numero de Colegiado:</strong> [Pendiente de incorporacion]</li>
+        <li><strong>Titulo academico:</strong> Licenciatura/Grado en Veterinaria (Espana)</li>
+        <li><strong>Normas profesionales:</strong> Codigo Deontologico para el ejercicio de la Profesion Veterinaria</li>
+      </ul>
+
+      <h2>3. Objeto y Ambito de Aplicacion</h2>
+      <p>
+        El presente Aviso Legal regula el acceso y uso del sitio web {clinica.web}
+        (en adelante, el "Sitio Web"), que {clinica.nombre} pone a disposicion
+        de los usuarios de Internet.
+      </p>
+      <p>
+        La utilizacion del Sitio Web atribuye la condicion de usuario del mismo e implica
+        la aceptacion plena y sin reservas de todas y cada una de las disposiciones incluidas
+        en este Aviso Legal.
+      </p>
+
+      <h2>4. Condiciones de Uso</h2>
+      <p>
+        El usuario se compromete a utilizar el Sitio Web, sus servicios y contenidos de
+        conformidad con la Ley, el presente Aviso Legal, las buenas costumbres y el orden publico.
+      </p>
+      <p>El usuario se obliga a:</p>
+      <ul>
+        <li>No utilizar el Sitio Web con fines ilicitos o contrarios a lo establecido en el presente Aviso Legal</li>
+        <li>No danar, deshabilitar, sobrecargar o deteriorar el Sitio Web</li>
+        <li>No introducir virus informaticos o cualquier otro sistema que pueda causar danos</li>
+        <li>No intentar acceder a cuentas de correo electronico o areas restringidas de otros usuarios</li>
+      </ul>
+
+      <h2>5. Propiedad Intelectual e Industrial</h2>
+      <p>
+        Todos los contenidos del Sitio Web, incluyendo textos, fotografias, graficos, imagenes,
+        iconos, tecnologia, software, enlaces y demas contenidos audiovisuales o sonoros,
+        asi como su diseno grafico y codigos fuente, son propiedad intelectual de
+        {clinica.nombre} o de terceros que han autorizado su uso.
+      </p>
+      <p>
+        Queda prohibida la reproduccion, transformacion, distribucion, comunicacion publica,
+        puesta a disposicion del publico y, en general, cualquier otra forma de explotacion
+        de todo o parte de los contenidos de este Sitio Web sin el consentimiento expreso
+        y por escrito de {clinica.nombre}.
+      </p>
+
+      <h2>6. Exclusion de Responsabilidad</h2>
+      <p>
+        {clinica.nombre} no garantiza la disponibilidad y continuidad del funcionamiento
+        del Sitio Web. En consecuencia, no sera responsable de los danos y perjuicios que pudieran
+        derivarse de:
+      </p>
+      <ul>
+        <li>La falta de disponibilidad o accesibilidad al Sitio Web</li>
+        <li>La interrupcion en el funcionamiento del Sitio Web o fallos informaticos</li>
+        <li>La presencia de virus o programas maliciosos en los contenidos</li>
+        <li>El uso ilicito, negligente, fraudulento o contrario al presente Aviso Legal</li>
+      </ul>
+
+      <h2>7. Enlaces a Terceros</h2>
+      <p>
+        El Sitio Web puede contener enlaces a sitios web de terceros. {clinica.nombre}
+        no asume ninguna responsabilidad por el contenido, politicas de privacidad o practicas
+        de los sitios web de terceros.
+      </p>
+
+      <h2>8. Legislacion Aplicable y Jurisdiccion</h2>
+      <p>
+        El presente Aviso Legal se rige por la legislacion espanola. Para la resolucion de
+        cualquier controversia que pudiera derivarse del acceso o uso del Sitio Web,
+        las partes se someten a los Juzgados y Tribunales de {clinica.ciudad}.
+      </p>
+
+      <h2>9. Modificaciones</h2>
+      <p>
+        {clinica.nombre} se reserva el derecho de modificar el presente Aviso Legal
+        para adaptarlo a novedades legislativas o jurisprudenciales, asi como a practicas de la industria.
+      </p>
+
+      <p class="text-sm mt-8 pt-4 border-t border-gray-200 text-gray-500">
+        Ultima actualizacion: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,212 @@
+---
+/**
+ * Hero Section - Clinica Veterinaria 2000
+ * Seccion principal con imagen de fondo, overlay y CTAs
+ * Mantiene la estetica original: fondo con imagen + overlay blur + backdrop
+ */
+import { clinic, getPhoneLink, getEmergencyPhoneLink, getDisplayPhone, getEmergencyPhone } from "../config/clinic";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  accentTitle?: string;
+  description?: string;
+  showCTA?: boolean;
+  showEmergencyButton?: boolean;
+}
+
+const {
+  title = "Tu veterinario de confianza",
+  subtitle = "en Tres Cantos:",
+  accentTitle = clinic.identity.tagline,
+  description = "Medicina preventiva, trato cercano y la tranquilidad de dejar a tu mejor amigo en manos expertas. Unete a las familias que nos recomiendan al 100%.",
+  showCTA = true,
+  showEmergencyButton = true,
+} = Astro.props;
+
+// Colores desde configuracion
+const primaryColor = clinic.design.colors.primary;
+const secondaryColor = clinic.design.colors.secondary;
+
+// Telefonos
+const phoneDisplay = getDisplayPhone();
+const phoneLink = getPhoneLink();
+const emergencyDisplay = getEmergencyPhone();
+const emergencyLink = getEmergencyPhoneLink();
+---
+
+<section id="inicio" class="hero">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <!-- Titulo principal -->
+      <h1 class="hero-title">
+        {title} <br /> {subtitle}
+      </h1>
+
+      <!-- Titulo con acento -->
+      <h2 class="hero-accent-title">
+        <span class="text-accent text-shadow">{accentTitle}</span>
+      </h2>
+
+      <!-- Descripcion -->
+      <p class="hero-subtitle">
+        {description}
+      </p>
+
+      <!-- CTAs -->
+      {showCTA && (
+        <div class="hero-actions">
+          <!-- CTA Principal: Pedir cita -->
+          <a
+            href={phoneLink}
+            class="btn btn-primary btn-lg"
+          >
+            Pide tu cita - {phoneDisplay}
+          </a>
+
+          <!-- CTA Secundario: Urgencias -->
+          {showEmergencyButton && (
+            <a
+              href={emergencyLink}
+              class="btn btn-outline btn-lg"
+            >
+              Urgencias: {emergencyDisplay}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ primaryColor, secondaryColor }}>
+  .hero {
+    padding: 6rem 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/images/hero.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero-container {
+    display: block;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    background: rgba(0, 150, 255, 0.1);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 700;
+  }
+
+  .hero-accent-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: white;
+    font-weight: 700;
+  }
+
+  .text-accent {
+    color: var(--primaryColor);
+  }
+
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--primaryColor);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--secondaryColor);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    border-color: var(--secondaryColor);
+    color: white;
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--secondaryColor);
+    color: white;
+  }
+
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    min-width: 280px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-accent-title {
+      font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+    }
+
+    .btn-lg {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+</style>

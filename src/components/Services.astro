@@ -1,0 +1,151 @@
+---
+/**
+ * Services Section - Clinica Veterinaria 2000
+ * Grid de 4 servicios con iconos emoji
+ * Lee servicios desde clinic.ts
+ */
+import { clinic, getFeaturedServices } from "../config/clinic";
+import ServiceCard from "./ServiceCard.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showCTA?: boolean;
+}
+
+const {
+  title = "Todo lo que tu mascota necesita para una vida larga y feliz.",
+  subtitle = "Nos enfocamos en la salud integral (\"One Health\").<br />Prevenir es siempre mejor (y mas economico) que curar.",
+  showCTA = true,
+} = Astro.props;
+
+// Colores
+const primaryColor = clinic.design.colors.primary;
+const textColor = clinic.design.colors.text;
+const textMutedColor = clinic.design.colors.textMuted;
+const surfaceColor = clinic.design.colors.surface;
+
+// Mapeo de iconos a emojis
+const iconToEmoji: Record<string, string> = {
+  "Syringe": "💉",
+  "Stethoscope": "🩺",
+  "Scissors": "🔬",
+  "ClipboardList": "📋",
+  "default": "🐾",
+};
+
+// Servicios destacados
+const services = getFeaturedServices();
+---
+
+<section id="servicios" class="services-section" style={`background-color: ${surfaceColor};`}>
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <h2 class="section-title" style={`color: ${primaryColor};`}>
+        {title}
+      </h2>
+      <p class="section-subtitle" style={`color: ${textMutedColor};`} set:html={subtitle}>
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+      {services.map((service) => (
+        <ServiceCard
+          name={service.name}
+          description={service.shortDescription}
+          emoji={iconToEmoji[service.icon] || iconToEmoji["default"]}
+          href={`/servicios/${service.slug}`}
+        />
+      ))}
+    </div>
+
+    <!-- CTA -->
+    {showCTA && (
+      <div class="section-cta">
+        <a
+          href="#contacto"
+          class="btn btn-secondary"
+          style={`background-color: ${primaryColor};`}
+        >
+          Consultar dudas por telefono
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary {
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

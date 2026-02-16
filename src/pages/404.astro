@@ -1,0 +1,84 @@
+---
+/**
+ * 404 PAGE - Pagina no encontrada
+ * Clinica Veterinaria 2000
+ */
+import Layout from "../layouts/Layout.astro";
+import { clinic, getPhoneLink } from "../config/clinic";
+---
+
+<Layout
+  title="Pagina no encontrada"
+  description="La pagina que buscas no existe."
+>
+  <section class="min-h-[70vh] flex items-center justify-center" style={`background-color: ${clinic.design.colors.surface};`}>
+    <div class="container mx-auto px-4 md:px-6 text-center">
+      <!-- Numero 404 grande -->
+      <h1
+        class="text-[120px] md:text-[180px] font-black leading-none opacity-20"
+        style={`color: ${clinic.design.colors.primary};`}
+      >
+        404
+      </h1>
+
+      <!-- Mensaje -->
+      <div class="-mt-6 md:-mt-10">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4" style={`color: ${clinic.design.colors.text};`}>
+          Ups! Pagina no encontrada
+        </h2>
+        <p class="mb-8 max-w-md mx-auto" style={`color: ${clinic.design.colors.textMuted};`}>
+          La pagina que buscas no existe o ha sido movida.
+          Pero no te preocupes, tu mascota sigue en buenas manos.
+        </p>
+
+        <!-- Acciones -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center gap-2 text-white font-bold py-3 px-8 rounded-full hover:opacity-90 transition-all"
+            style={`background-color: ${clinic.design.colors.primary};`}
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Volver al inicio
+          </a>
+          <a
+            href="/contacto"
+            class="inline-flex items-center justify-center gap-2 font-bold py-3 px-8 rounded-full border-2 hover:bg-gray-50 transition-all"
+            style={`color: ${clinic.design.colors.primary}; border-color: ${clinic.design.colors.primary}30; background-color: white;`}
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Contactar
+          </a>
+        </div>
+
+        <!-- Telefono directo -->
+        <p class="mt-8 text-sm" style={`color: ${clinic.design.colors.textMuted};`}>
+          O llamanos directamente al
+          <a
+            href={getPhoneLink()}
+            class="font-semibold hover:underline"
+            style={`color: ${clinic.design.colors.primary};`}
+          >
+            {clinic.contact.phones.primary}
+          </a>
+        </p>
+      </div>
+
+      <!-- Icono decorativo de mascota -->
+      <div class="mt-12 opacity-30">
+        <svg
+          class="w-24 h-24 mx-auto"
+          style={`color: ${clinic.design.colors.primary};`}
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M4.5 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm15 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-7.5 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM12 12c-2.5 0-4.71 1.28-6 3.22-.54.82-.54 1.93 0 2.75C7.29 19.72 9.5 21 12 21s4.71-1.28 6-3.03c.54-.82.54-1.93 0-2.75C16.71 13.28 14.5 12 12 12z"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,140 @@
+---
+/**
+ * Politica de Privacidad - Clinica Veterinaria 2000
+ * Conforme al RGPD y LOPDGDD
+ */
+import Layout from "../layouts/Layout.astro";
+
+// Datos de la clinica
+const clinica = {
+  nombre: "Clinica Veterinaria 2000",
+  direccion: "C. del Pico del Indio, 39",
+  codigoPostal: "28760",
+  ciudad: "Tres Cantos",
+  provincia: "Madrid",
+  telefono: "91 803 45 19",
+  telefonoUrgencias: "686 06 49 02",
+  email: "clinica2000@gmail.com",
+  web: "https://veterinaria2000.es",
+};
+
+const direccionCompleta = `${clinica.direccion}, ${clinica.codigoPostal} ${clinica.ciudad}, ${clinica.provincia}`;
+---
+
+<Layout
+  title="Politica de Privacidad"
+  description={`Politica de privacidad de ${clinica.nombre}. Informacion sobre el tratamiento de datos personales conforme al RGPD y LOPDGDD.`}
+>
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-3xl prose prose-lg">
+      <h1 class="text-primary">Politica de Privacidad</h1>
+
+      <h2>1. Responsable del Tratamiento</h2>
+      <p>
+        De conformidad con lo dispuesto en el Reglamento (UE) 2016/679 del Parlamento Europeo
+        y del Consejo, de 27 de abril de 2016 (RGPD), y en la Ley Organica 3/2018, de 5 de diciembre,
+        de Proteccion de Datos Personales y garantia de los derechos digitales (LOPDGDD),
+        le informamos que el responsable del tratamiento de sus datos personales es:
+      </p>
+      <ul>
+        <li><strong>Identidad:</strong> {clinica.nombre}</li>
+        <li><strong>CIF:</strong> [Pendiente de incorporacion]</li>
+        <li><strong>Direccion:</strong> {direccionCompleta}</li>
+        <li><strong>Email:</strong> <a href={`mailto:${clinica.email}`}>{clinica.email}</a></li>
+        <li><strong>Telefono:</strong> {clinica.telefono}</li>
+      </ul>
+
+      <h2>2. Finalidad del Tratamiento</h2>
+      <p>En {clinica.nombre} tratamos sus datos personales con las siguientes finalidades:</p>
+      <ul>
+        <li><strong>Gestion de citas:</strong> Organizar la agenda de consultas y servicios veterinarios</li>
+        <li><strong>Historial Clinico:</strong> Gestionar la ficha medica de los pacientes (animales) y la relacion con sus propietarios</li>
+        <li><strong>Comunicacion tecnica/sanitaria:</strong> Envio de recordatorios de vacunacion, desparasitacion o revisiones (esencial para la salud publica y animal)</li>
+        <li><strong>Gestion administrativa:</strong> Facturacion, contabilidad y cumplimiento de obligaciones legales</li>
+        <li><strong>Consultas Web:</strong> Atender solicitudes de informacion a traves del formulario de contacto</li>
+        <li>Enviar comunicaciones comerciales si ha dado su consentimiento expreso</li>
+      </ul>
+
+      <h2>3. Legitimacion</h2>
+      <p>La base legal para el tratamiento de sus datos es:</p>
+      <ul>
+        <li><strong>Ejecucion de un contrato:</strong> Para la prestacion de servicios veterinarios y facturacion</li>
+        <li><strong>Consentimiento del interesado:</strong> Al rellenar formularios de contacto, solicitar informacion o para el envio de comunicaciones comerciales</li>
+        <li><strong>Interes legitimo:</strong> Para el envio de recordatorios preventivos (salud animal) y la mejora de nuestros servicios</li>
+        <li><strong>Cumplimiento de obligaciones legales:</strong> Normativa sanitaria y fiscal aplicable</li>
+      </ul>
+
+      <h2>4. Destinatarios</h2>
+      <p>
+        Sus datos no seran cedidos a terceros, salvo obligacion legal. Sin embargo, para la correcta
+        prestacion del servicio, trabajamos con encargados de tratamiento que cumplen la normativa:
+      </p>
+      <ul>
+        <li>Software de gestion de clinica (PMS)</li>
+        <li>Laboratorios externos de diagnostico (con su consentimiento)</li>
+        <li>Administraciones publicas cuando asi lo requiera la normativa vigente</li>
+        <li>Servicios de alojamiento web y correo electronico</li>
+      </ul>
+
+      <h2>5. Derechos del Usuario</h2>
+      <p>Cualquier persona tiene derecho a obtener confirmacion sobre si estamos tratando sus datos. Puede ejercer los siguientes derechos:</p>
+      <ul>
+        <li><strong>Acceso:</strong> Conocer que datos personales tenemos sobre usted</li>
+        <li><strong>Rectificacion:</strong> Solicitar la correccion de datos inexactos</li>
+        <li><strong>Supresion:</strong> Solicitar la eliminacion de sus datos</li>
+        <li><strong>Oposicion:</strong> Oponerse al tratamiento de sus datos</li>
+        <li><strong>Limitacion:</strong> Solicitar la limitacion del tratamiento</li>
+        <li><strong>Portabilidad:</strong> Recibir sus datos en formato estructurado</li>
+      </ul>
+      <p>
+        Para ejercer estos derechos, puede dirigirse a nosotros por email a
+        <a href={`mailto:${clinica.email}`}>{clinica.email}</a>
+        o por correo postal a nuestra direccion, adjuntando copia de su documento de identidad (DNI/NIE).
+      </p>
+      <p>
+        Asimismo, tiene derecho a presentar una reclamacion ante la Agencia Espanola de
+        Proteccion de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>)
+        si considera que el tratamiento no se ajusta a la normativa vigente.
+      </p>
+
+      <h2>6. Plazo de Conservacion</h2>
+      <p>
+        Los datos personales se conservaran durante el tiempo necesario para cumplir con la
+        finalidad para la que se recabaron y para determinar las posibles responsabilidades
+        derivadas de dicha finalidad y del tratamiento de los datos:
+      </p>
+      <ul>
+        <li><strong>Datos de clientes:</strong> Durante la relacion contractual y 5 anos despues (obligaciones fiscales)</li>
+        <li><strong>Historiales clinicos:</strong> Segun la normativa sanitaria aplicable</li>
+        <li><strong>Datos de contacto:</strong> Hasta que solicite su supresion</li>
+        <li><strong>Datos de facturacion:</strong> 6 anos (articulo 30 Codigo de Comercio)</li>
+      </ul>
+
+      <h2>7. Medidas de Seguridad</h2>
+      <p>
+        {clinica.nombre} ha adoptado las medidas tecnicas y organizativas necesarias
+        para garantizar la seguridad de los datos personales y evitar su alteracion, perdida,
+        tratamiento o acceso no autorizado, habida cuenta del estado de la tecnologia,
+        la naturaleza de los datos almacenados y los riesgos a que estan expuestos.
+      </p>
+
+      <h2>8. Datos de Menores</h2>
+      <p>
+        No recopilamos intencionadamente datos personales de menores de 14 anos.
+        Si tiene conocimiento de que un menor nos ha proporcionado datos personales,
+        contacte con nosotros para proceder a su eliminacion.
+      </p>
+
+      <h2>9. Modificaciones</h2>
+      <p>
+        Nos reservamos el derecho de modificar esta Politica de Privacidad para adaptarla
+        a novedades legislativas o jurisprudenciales. Le recomendamos revisar esta pagina
+        periodicamente.
+      </p>
+
+      <p class="text-sm mt-8 pt-4 border-t border-gray-200 text-gray-500">
+        Ultima actualizacion: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+    </div>
+  </section>
+</Layout>

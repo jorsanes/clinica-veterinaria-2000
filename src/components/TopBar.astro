@@ -1,0 +1,63 @@
+---
+/**
+ * TopBar.astro - Barra superior con info de contacto
+ * Horario, email y telefono. Visible en desktop, compacto en movil.
+ */
+import { clinic, getPhoneLink, getEmailLink } from "../config/clinic";
+
+const primaryColor = clinic.design.colors.primary;
+---
+
+<div
+  class="text-white py-2 text-xs"
+  style={`background-color: ${primaryColor};`}
+>
+  <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+
+    <!-- Izquierda: Inicio + Horario (oculto en movil) -->
+    <div class="hidden sm:flex items-center gap-4">
+      <a
+        href="/"
+        class="flex items-center transition-colors opacity-80 hover:opacity-100"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Inicio
+      </a>
+      <span class="w-px h-3 bg-white/30"></span>
+      <span class="opacity-80 flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        L-V: {clinic.schedule.weekdays}
+      </span>
+    </div>
+
+    <!-- Derecha: Email + Telefono -->
+    <div class="flex gap-4 md:gap-6 ml-auto sm:ml-0">
+      <a
+        href={getEmailLink()}
+        class="flex items-center transition-all opacity-80 hover:opacity-100"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5">
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <span class="hidden md:inline">{clinic.contact.email}</span>
+        <span class="md:hidden">Email</span>
+      </a>
+      <a
+        href={getPhoneLink()}
+        class="flex items-center transition-all font-semibold"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        {clinic.contact.phoneFormatted}
+      </a>
+    </div>
+  </div>
+</div>
